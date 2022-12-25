@@ -1,10 +1,15 @@
 import 'package:easy_kitchen/profile_screen.dart';
+import 'package:easy_kitchen/signup_screen.dart';
+import 'package:easy_kitchen/tabs_page.dart';
+import 'package:easy_kitchen/views/run_recipe.dart';
+import 'package:easy_kitchen/views/widgets/detail_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(RunRecipe());
+  //runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -169,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 print(user);
                 if(user!= null)
                   {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> ProfileScreen()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> TabsPage()));
                         //make new screen
                   }
               },
@@ -180,6 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: 18.0,
                 ),
               ),
+
             ),
           ),
         ],
