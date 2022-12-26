@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "14445746800",
+    "project_id": "easy-kitchen-52877",
+    "storage_bucket": "easy-kitchen-52877.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14445746800:android:97c1af686f1f0e2a8ab2b5",
+        "android_client_info": {
+          "package_name": "com.example.easy_kitchen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14445746800-ve5snuiikandh9da0l0hsroqqprfc9v3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5Ty7cTU30CCgdi1cz-iXE26Y64G9VhqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14445746800-ve5snuiikandh9da0l0hsroqqprfc9v3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

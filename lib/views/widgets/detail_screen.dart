@@ -58,8 +58,11 @@ class DetailScreen extends StatelessWidget {
             ListView.builder(
             itemCount: extendedIngredients.length,
             itemBuilder: (context, index) {
-              return Text(extendedIngredients[index]['name']);
-            }
+            return RecipeCard(
+            title: extendedIngredients[index].name,
+            id: extendedIngredients[index].id,
+            thumbnailUrl: extendedIngredients[index].images,
+            extendedIngredients:extendedIngredients[index].extendedIngredients);}
             ),
           ],
         )
