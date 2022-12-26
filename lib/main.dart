@@ -1,15 +1,17 @@
-import 'package:easy_kitchen/profile_screen.dart';
-import 'package:easy_kitchen/signup_screen.dart';
+//import 'package:easy_kitchen/profile_screen.dart';
+//import 'package:easy_kitchen/signup_screen.dart';
 import 'package:easy_kitchen/tabs_page.dart';
 import 'package:easy_kitchen/views/run_recipe.dart';
 import 'package:easy_kitchen/views/widgets/detail_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'views/login_page.dart';
 
 void main() {
   runApp(RunRecipe());
   //runApp(MyApp());
+  //runApp(LoginPage());
 }
 
 class MyApp extends StatelessWidget {

@@ -7,18 +7,21 @@ class RecipeCard extends StatelessWidget {
   final String title;
   final int id;
   final String thumbnailUrl;
+  final List extendedIngredients;
 
   RecipeCard({
 
     required this.title,
     required this.id,
     required this.thumbnailUrl,
+    required this.extendedIngredients,
+
   });
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap:(){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => DetailScreen(this.title,this.id,this.thumbnailUrl)));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => DetailScreen(this.title,this.extendedIngredients,this.thumbnailUrl)));
       },
       child: Container(
 
@@ -88,7 +91,7 @@ class RecipeCard extends StatelessWidget {
                           size: 18,
                         ),
                         SizedBox(width: 7),
-                        Text(rating),
+                        //Text(title),
                       ],
                     ),
                   ),
@@ -109,7 +112,7 @@ class RecipeCard extends StatelessWidget {
                           size: 18,
                         ),
                         SizedBox(width: 7),
-                        Text(cookTime),
+                      //  Text(cookTime),
                       ],
                     ),
                   )
