@@ -1,52 +1,73 @@
+import 'package:easy_kitchen/test_base.dart';
+import 'package:easy_kitchen/views/home.dart';
+import 'package:easy_kitchen/views/login_page.dart';
+import 'package:easy_kitchen/views/widgets/ingredients_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TabsPage extends StatefulWidget {
   _TabsPageState createState() => _TabsPageState();
+
 }
 
 class _TabsPageState extends State<TabsPage> {
+   int  _selectedItem=0 ;
+   List titles =['Pantry','Recipes','Favorite','Shopping List'];
+   String defualtTitle='Pantry';
+
+
+   static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    PantryScreen(),
+    HomePage(),
+    PantryScreen(),
+    IngredientsScreen(),
+];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedItem = index;
+      defualtTitle=titles[index];
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+
       appBar: AppBar(
-        leading: Icon(
-          Icons.account_circle,
+        leading: IconButton(onPressed: (){
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => LoginScreen()));
+        }, icon: Icon(Icons.logout)
         ),
-        title: Text('EasyKitchen'),
-        backgroundColor: Color.fromRGBO(10, 38, 71, 1),
+        title: Text(defualtTitle),
+        backgroundColor: Colors.blue,
+
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.all(20),
-        padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-        child: TextField(
-          decoration: const InputDecoration(
-            hintText: "Search for anything",
-            prefixIcon: Icon(
-              Icons.search,
-              // color: Colors.pinkAccent,
-            ),
-          ),
-        ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedItem)
+        ,
       ),
       bottomNavigationBar: BottomNavigationBar(
         // backgroundColor: Colors.green,
         // unselectedItemColor: Colors.red,
         //selectedItemColor: Theme.of(context).accentColor,
         type: BottomNavigationBarType.shifting,
-        items: [
+        items:const<BottomNavigationBarItem>  [
           BottomNavigationBarItem(
-            backgroundColor: Color.fromRGBO(10, 38, 71, 1),
+            backgroundColor: Colors.blue,
             icon: Icon(
               Icons.ad_units_sharp,
               // color: Colors.pinkAccent,
             ),
             label: "Pantry",
           ),
+
           BottomNavigationBarItem(
             // backgroundColor: Colors.white,
             icon: Icon(
@@ -72,6 +93,8 @@ class _TabsPageState extends State<TabsPage> {
             label: "Shopping List",
           ),
         ],
+        currentIndex:_selectedItem ,
+        onTap: _onItemTapped,
       ),
     );
   }

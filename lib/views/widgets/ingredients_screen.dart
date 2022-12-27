@@ -16,36 +16,65 @@ class _IngredientsScreenState extends State<IngredientsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Center(child: Text('My Pantry')),
-        ),
         body: ListView.separated(
             separatorBuilder: (BuildContext context, int index) =>
                 const Divider(),
             itemCount: items.length,
             itemBuilder: (context, index) {
               return Container(
-                height: 77,
+                height: 100,
                 child: Card(
-                  color: Colors.white,
-                    child: Column(
-                  children: [
-                    ListTile(
-                        title: Text(items[index]),
-                        // leading: CircleAvatar(
-                        //     backgroundImage: NetworkImage(
-                        //         "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
-                        trailing: IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () {
-                              setState(() {
-                                items.removeAt(index);
-                              });
-                            }
-                            ),
-                    ),
-                  ],
-                )),
+                  clipBehavior: Clip.antiAlias,
+                  child: Container(
+                    height: 120,
+                    padding: const EdgeInsets.all(0),
+                    child: Row(children: [
+                      Expanded(
+                        flex: 6,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage("https://media.istockphoto.com/id/1203599923/photo/food-background-with-assortment-of-fresh-organic-vegetables.jpg?b=1&s=170667a&w=0&k=20&c=fRNCED4dyey-i6K2RHTPaIm_HFLUr3hnj4J6WblHaXc="),
+                                  fit: BoxFit.fill)),
+                        ),
+                      ),
+                      Spacer(
+                        flex: 1,
+                      ),
+                      Expanded(
+                        flex: 14,
+                        child: Container(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            //mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Text(items[index],
+                                  style: TextStyle(
+                                      fontSize: 20.0,)),
+
+                            ],
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                ),
+                // child: Card(
+                //   elevation: 4,
+                //  // color: Colors.white,
+                //     child: Column(
+                //   children: [
+                //     ListTile(
+                //         title: Text(items[index]),
+                //         leading: Image(
+                //             backgroundImage: NetworkImage(
+                //                 "https://media.istockphoto.com/id/1203599923/photo/food-background-with-assortment-of-fresh-organic-vegetables.jpg?b=1&s=170667a&w=0&k=20&c=fRNCED4dyey-i6K2RHTPaIm_HFLUr3hnj4J6WblHaXc=")),
+                //
+                //     ),
+                //   ],
+                // ),
+                // ),
               );
             }));
 

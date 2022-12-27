@@ -6,17 +6,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'helpers/Ingredients.dart';
 
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class PantryScreen extends StatefulWidget {
+  const PantryScreen({Key? key}) : super(key: key);
 
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<PantryScreen> createState() => _PantryScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _PantryScreenState extends State<PantryScreen> {
   List todos = List.empty();
   String title = "";
   String description = "";
@@ -38,9 +36,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection("pantry").snapshots(),
         builder: (context, snapshot) {
@@ -66,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           //     : ""),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete),
-                            color: Colors.red,
+                           // color: Colors.red,
                             onPressed: () {
                               setState(() {
                                 todos.removeAt(index);
