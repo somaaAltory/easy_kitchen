@@ -45,8 +45,14 @@ class DetailScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(22.0)),
                 height: 35,
                 color: Colors.lightBlueAccent,
-                child: Text(extendedIngredients[0]['name'],
-                    style: new TextStyle(fontSize: 16.0, color: Colors.white)),
+                 child:ListView.builder(
+                     itemCount: extendedIngredients.length,
+                     itemBuilder: (context, index) {
+                       return Text(extendedIngredients[index].name,
+                         style: TextStyle(color: Colors.deepPurple),);}
+                 ),
+                 // Text(extendedIngredients[0]['name'],
+                //     style: new TextStyle(fontSize: 16.0, color: Colors.white)),
                 onPressed: () {
 
                 },
@@ -58,11 +64,8 @@ class DetailScreen extends StatelessWidget {
             ListView.builder(
             itemCount: extendedIngredients.length,
             itemBuilder: (context, index) {
-            return RecipeCard(
-            title: extendedIngredients[index].name,
-            id: extendedIngredients[index].id,
-            thumbnailUrl: extendedIngredients[index].images,
-            extendedIngredients:extendedIngredients[index].extendedIngredients);}
+            return Text(extendedIngredients[index].name,
+            style: TextStyle(color: Colors.deepPurple),);}
             ),
           ],
         )

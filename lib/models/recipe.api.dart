@@ -7,7 +7,7 @@ class RecipeApi {
     //var uri = Uri.https('api.spoonacular.com/recipes/complexSearch/?apiKey=b5f902c80b7a4f4e9ced7fd3ca8224cc&number=20');
 
     final response = await http.get(Uri.parse(
-        'https://api.spoonacular.com/recipes/complexSearch/?apiKey=b5f902c80b7a4f4e9ced7fd3ca8224cc&number=20'));
+        'https://api.spoonacular.com/recipes/complexSearch/?apiKey=b13abb543b844c47b376b12b186fdd6a&number=3'));
     //  headers:{ "Accept-Encoding": "gzip,deflate,compress" });
 
 
@@ -18,7 +18,7 @@ class RecipeApi {
 
     for (var i in data['results']) {
       int id =i['id'];
-       var url_recipe = 'https://api.spoonacular.com/recipes/${id}/information?apiKey=b5f902c80b7a4f4e9ced7fd3ca8224cc';
+       var url_recipe = 'https://api.spoonacular.com/recipes/${id}/information?apiKey=b13abb543b844c47b376b12b186fdd6a';
        var response_recipe = await http.get(Uri.parse(url_recipe));
 
        Map recipe_data=jsonDecode(response_recipe.body);

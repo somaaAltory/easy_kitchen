@@ -82,14 +82,21 @@ class _LoginPageState extends State<LoginPage> {
             //signin button
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration
-                  (
-                  color: Colors.deepPurple,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration
+                    (
+                    color: Colors.deepPurple,
+                    borderRadius: BorderRadius.circular(12)
+
+                  ),
+                  child: Center(child: Text('Sign In',
+                  style: TextStyle(color: Colors.white,
+                  ),)),
 
                 ),
-                child: Center(child: Text('Sign In')),
-
               ),
             ),
           ],
