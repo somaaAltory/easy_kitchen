@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 10),
             Text(
               'Welcome back!',
-              style: TextStyle( fontSize: 24),
+              style: TextStyle(fontSize: 24),
             ),
             SizedBox(height: 10),
 
@@ -32,8 +32,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Container(
-                decoration: BoxDecoration
-                  (
+                decoration: BoxDecoration(
                   color: Colors.grey[200],
                   border: Border.all(color: Colors.white),
                   borderRadius: BorderRadius.circular(12),
@@ -41,11 +40,9 @@ class _LoginPageState extends State<LoginPage> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: TextField(
-                    decoration: InputDecoration
-                      (
+                    decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Email',
-
                     ),
                   ),
                 ),
@@ -58,8 +55,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Container(
-                decoration: BoxDecoration
-                  (
+                decoration: BoxDecoration(
                   color: Colors.grey[200],
                   border: Border.all(color: Colors.white),
                   borderRadius: BorderRadius.circular(12),
@@ -68,11 +64,9 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.only(left: 20.0),
                   child: TextField(
                     obscureText: true,
-                    decoration: InputDecoration
-                      (
+                    decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Password',
-
                     ),
                   ),
                 ),
@@ -86,18 +80,22 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Container(
                   padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration
-                    (
-                    color: Colors.deepPurple,
-                    borderRadius: BorderRadius.circular(12)
-
-                  ),
-                  child: Center(child: Text('Sign In',
-                  style: TextStyle(color: Colors.white,
-                  ),)),
-
+                  decoration: BoxDecoration(
+                      color: Colors.deepPurple,
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Center(
+                      child: Text(
+                    'Sign In',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  )),
                 ),
               ),
+            ),
+            SizedBox(height: 10,),
+            Text('Register Now',
+            //style: TextStyle,
             ),
           ],
         ),

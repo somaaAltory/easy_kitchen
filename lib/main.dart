@@ -1,6 +1,8 @@
 //import 'package:easy_kitchen/profile_screen.dart';
 //import 'package:easy_kitchen/signup_screen.dart';
 import 'package:easy_kitchen/tabs_page.dart';
+import 'package:easy_kitchen/test_base.dart';
+import 'package:easy_kitchen/views/login_page.dart';
 import 'package:easy_kitchen/views/run_recipe.dart';
 import 'package:easy_kitchen/views/widgets/detail_screen.dart';
 import 'package:easy_kitchen/views/widgets/ingredients_screen.dart';
@@ -8,8 +10,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
   //runApp(IngredientsScreen());
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -18,7 +22,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: IngredientsScreen(),
+     // home: LoginPage(),
+      home: MyHomePage(title: 'home'),
     );
   }
 }

@@ -1,8 +1,8 @@
 const Ingredients_list=
 [
   'Avocado','Carrots','Celery','Corn','Tomatoes','Tomatillo',
-  // 'Sweet Potato','Turnips', 'Water Chestnuts',
-  // 'Potatoes', 'Pumpkin', 'Radicchio', 'Radish', 'Rhubarb'
+  'Sweet Potato','Turnips', 'Water Chestnuts',
+   'Potatoes', 'Pumpkin', 'Radicchio', 'Radish', 'Rhubarb'
 
 
 ];
