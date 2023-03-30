@@ -4,7 +4,6 @@ import 'package:easy_kitchen/models/recipe.dart';
 
 class RecipeApi {
   static Future<List<Recipe>> getRecipe() async {
-    //var uri = Uri.https('api.spoonacular.com/recipes/complexSearch/?apiKey=b5f902c80b7a4f4e9ced7fd3ca8224cc&number=20');
 
     final response = await http.get(Uri.parse(
         'https://api.spoonacular.com/recipes/complexSearch/?apiKey=b13abb543b844c47b376b12b186fdd6a&number=3'));
@@ -26,9 +25,14 @@ class RecipeApi {
          'title' :recipe_data['title'],
          'id':i['id'],
          'image':recipe_data['image'],
-         'extendedIngredients' :recipe_data['extendedIngredients']
+         'extendedIngredients' :recipe_data['extendedIngredients'],
+         'readyInMinutes': recipe_data['readyInMinutes'] ,
+         'vegan': recipe_data['vegan'],
+         'vegetarian': recipe_data['vegetarian'],
+         'dairyFree': recipe_data['dairyFree'],
+         'cheap': recipe_data['cheap'],
+         'glutenFree': recipe_data['glutenFree']
        };
-
       _temp.add(recipe);
 
     }
@@ -36,5 +40,6 @@ class RecipeApi {
 
     return Recipe.recipesFromSnapshot(_temp);
   }
+
 
 }

@@ -3,14 +3,15 @@ import 'package:easy_kitchen/models/recipe.dart';
 import 'package:easy_kitchen/views/widgets/recipe_card.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class RecipeItem extends StatefulWidget {
+  const RecipeItem({Key? key}) : super(key: key);
+
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _RecipeItemState createState() => _RecipeItemState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _RecipeItemState extends State<RecipeItem> {
   late List<Recipe> _recipes;
   bool _isLoading = true;
 
@@ -36,10 +37,14 @@ class _HomePageState extends State<HomePage> {
           itemCount: _recipes.length,
           itemBuilder: (context, index) {
             return RecipeCard(
-                title: _recipes[index].title,
-                id: _recipes[index].id,
-                thumbnailUrl: _recipes[index].images,
-                extendedIngredients:_recipes[index].extendedIngredients,);
+              recipe: _recipes[index],
+                // title: _recipes[index].title,
+                // id: _recipes[index].id,
+                // thumbnailUrl: _recipes[index].images,
+                // extendedIngredients:_recipes[index].extendedIngredients,
+                // duration: _recipes[index].duration,
+                // isCheap: _recipes[index].isCheap,
+            );
           },
         ));
   }

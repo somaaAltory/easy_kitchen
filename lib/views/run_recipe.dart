@@ -1,4 +1,4 @@
-import 'package:easy_kitchen/views/home.dart';
+import 'package:easy_kitchen/views/recipe_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class RunRecipe extends StatelessWidget {
           bodyText2: TextStyle(color: Colors.white),
         ),
       ),
-      home: HomePage(),
+      // home: HomePage(),
     );
   }
 }
