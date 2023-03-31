@@ -27,10 +27,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     try {
       // check if password is confirmed
       if (passwordController.text == confirmPasswordController.text) {
-        // await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        //   email: emailController.text,
-        //   password: passwordController.text,
-        // );
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => TabsPage()));
       } else {
@@ -54,8 +50,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: const Text(
+              const Center(
+                child: Text(
                   "Sign Up",
                   style: TextStyle(
                       color: Colors.black,

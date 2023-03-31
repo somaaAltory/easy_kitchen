@@ -1,12 +1,16 @@
 import 'dart:developer';
 
+import 'package:easy_kitchen/helpers/helped_function.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:multi_select_flutter/bottom_sheet/multi_select_bottom_sheet.dart';
-import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import './helpers/Ingredients.dart';
+import 'models/barcode_api.dart';
+
 
 class PantryScreen extends StatefulWidget {
   const PantryScreen({Key? key}) : super(key: key);
@@ -17,13 +21,33 @@ class PantryScreen extends StatefulWidget {
 }
 
 class _PantryScreenState extends State<PantryScreen> {
-  List todos = List.empty(growable: true);
+  List ingredientsList = List.empty(growable: true);
+  final db = FirebaseFirestore.instance.collection('pantry');
+  late  String barcodeScanNumber = '';
   String title = "";
   String description = "";
+  String productName='';
   @override
   void initState() {
     super.initState();
     // initIngredients();
+  }
+
+  void addIngredient(String ingredient)
+  {
+    String id = db.doc().id;
+    db.doc(id).set({"name":ingredient,"id":id});
+    ingredientsList.add(ingredient);
+  }
+
+
+
+
+  Future<void> scanBarcode() async {
+    String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", false, ScanMode.DEFAULT);
+    barcodeScanNumber = barcodeScanRes ;
+    print("barcode scanned!$barcodeScanRes");
+    // return barcodeScanRes;
   }
 
 
@@ -52,13 +76,13 @@ class _PantryScreenState extends State<PantryScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     QueryDocumentSnapshot<Object?>? documentSnapshot =
                     snapshot.data?.docs[index];
-                    // todos.add(documentSnapshot);
+                    ingredientsList.add(documentSnapshot!["name"]);
                     return Dismissible(
                         key: Key(index.toString()),
                         child: Card(
                           elevation: 4,
                           child: ListTile(
-                            title: Text((documentSnapshot != null) ? (documentSnapshot["name"]) : ""),
+                            title: Text( documentSnapshot["name"]),
                             trailing: IconButton(
                               icon: const Icon(Icons.delete),
                              // color: Colors.red,
@@ -83,72 +107,63 @@ class _PantryScreenState extends State<PantryScreen> {
             );
           },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await showModalBottomSheet(
-              isScrollControlled: true,
-              context: context,
-              builder: (BuildContext context) {
-                return  MultiSelectBottomSheet(
-                  searchable: true,
-                  items: ingredients_list.map((e) => MultiSelectItem<dynamic>(e,e)).toList(),
-                  listType: MultiSelectListType.LIST,
-                  onConfirm: (values) {
-                    setState(() {
-                      for (var i in  values)
-                      {
-                        var  db = FirebaseFirestore.instance;
-                        String id = db.collection('pantry').doc().id;
-                        db.collection("pantry").doc(id).set({"name":i,"id":id});
-                        // todos.add({"name":i,"id":id} );
-                      }
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
 
-                    },
+        children: [
+          FloatingActionButton(
+            onPressed: () async {
+              await showModalBottomSheet(
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return  MultiSelectBottomSheet(
+                      searchable: true,
+                      items: ingredients_list.map((e) => MultiSelectItem<dynamic>(e,e)).toList(),
+                      listType: MultiSelectListType.LIST,
+                      onConfirm: (values) {
+                        setState(() {
+                          for (var ingredient in  values)
+                          {
+                            addIngredient(ingredient as String);
+                          }
+                        },
+                        );
+
+                      }, initialValue: [],
                     );
+                  });
+            },
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+          FloatingActionButton(onPressed:() async {
+            scanBarcode();
+            await BarcodeApi.getProductName( barcodeScanNumber);
+            setState(() {
+             productName= BarcodeApi.productName;
+            if(productName != "product not found")
+              {
+                if(!ingredientsList.contains(productName)) {
+                  addIngredient(productName);
+                }
+                else{
+                  showErrorMessage("product already in your pantry ", context);
+                }
 
-                  }, initialValue: [],
-                );
-                // return AlertDialog(
-                //   shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(10)),
-                //   title: const Text("Add Ingredient"),
-                //   content: Container(
-                //     width: 400,
-                //     height: 100,
-                //     child: Column(
-                //       children: [
-                //         TextField(
-                //           onChanged: (String value) {
-                //             title = value;
-                //           },
-                //         ),
-                //         TextField(
-                //           onChanged: (String value) {
-                //             description = value;
-                //           },
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                //   actions: <Widget>[
-                //     TextButton(
-                //         onPressed: () {
-                //           setState(() {
-                //             //todos.add(title);
-                //            // createToDo();
-                //           });
-                //           Navigator.of(context).pop();
-                //         },
-                //         child: const Text("Add"))
-                //   ],
-                // );
-              });
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
+              }
+           else
+              {
+                showErrorMessage("product not found", context);
+              }
+           });
+          }  ,
+          child: Icon(Icons.camera,),),
+        ],
       ),
+
     );
   }
 }

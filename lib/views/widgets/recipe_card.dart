@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../helpers/Ingredients.dart';
 import '../../models/recipe.dart';
@@ -115,8 +116,12 @@ class RecipeCard extends StatelessWidget {
                         ],
                         isSelected: selection,
                         onPressed: (int index){
-                          recipes.add(recipe);
-                          selection[index]= !selection[index];
+                          //  var recipeItem = recipes.firstWhere((element) => element.id == recipe.id);
+                          // if(recipeItem == null)
+                          //   {
+                              recipes.add(recipe);
+                              selection[index]= !selection[index];
+                            // }
                         },
                       ),
                       SizedBox(

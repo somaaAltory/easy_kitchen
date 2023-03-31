@@ -7,7 +7,7 @@ void showErrorMessage(String message,context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.redAccent,
         title: Center(
           child: Text(
             message,
