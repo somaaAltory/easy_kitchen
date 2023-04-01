@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:easy_kitchen/helpers/Ingredients.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -33,13 +32,13 @@ class _IngredientsScreenState extends State<IngredientsScreen> {
                       Expanded(
                         flex: 6,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: NetworkImage("https://media.istockphoto.com/id/1203599923/photo/food-background-with-assortment-of-fresh-organic-vegetables.jpg?b=1&s=170667a&w=0&k=20&c=fRNCED4dyey-i6K2RHTPaIm_HFLUr3hnj4J6WblHaXc="),
                                   fit: BoxFit.fill)),
                         ),
                       ),
-                      Spacer(
+                      const Spacer(
                         flex: 1,
                       ),
                       Expanded(
@@ -51,7 +50,7 @@ class _IngredientsScreenState extends State<IngredientsScreen> {
                             //mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               Text(items[index],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 20.0,)),
 
                             ],
