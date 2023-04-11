@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../helpers/Ingredients.dart';
 import '../../models/recipe.dart';
-import 'detail_screen.dart';
+import '../../Screens/detail_screen.dart';
 
 class RecipeCard extends StatelessWidget {
    final Recipe recipe;

@@ -1,11 +1,9 @@
-import 'package:easy_kitchen/test_base.dart';
+import 'package:easy_kitchen/Screens/categoryScreen.dart';
+import 'package:easy_kitchen/Screens/pantry_screen.dart';
 import 'package:easy_kitchen/views/recipe_item.dart';
 import 'package:easy_kitchen/Screens/login_screen.dart';
-import 'package:easy_kitchen/views/widgets/category_widget.dart';
-import 'package:easy_kitchen/views/widgets/ingredients_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'Screens/favorites_screen.dart';
 
 class TabsPage extends StatefulWidget {
@@ -25,7 +23,8 @@ class _TabsPageState extends State<TabsPage> {
     FavoriteScreen(),
     // PantryScreen(),
     // IngredientsScreen(),
-    CategoreyWidget()
+    // CategoryWidget()
+      CategoryScreen(),
   ];
 
   void _onItemTapped(int index) {

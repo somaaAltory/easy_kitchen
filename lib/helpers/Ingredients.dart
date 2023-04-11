@@ -1,6 +1,163 @@
 import '../models/recipe.dart';
 
 List<Recipe> recipes=[];
+List<String> myPantryList=[];
+
+const ingredientsByCategories=[
+  {
+    "category": "fruits",
+    "ingredients": [
+      "apples",
+      "avocado",
+      "bananas",
+      "blackberries",
+      "blueberries",
+      "cantaloupe",
+      "cherries",
+      "coconut",
+      "cranberries",
+      "dates",
+      "figs",
+      "grapefruit",
+      "grapes",
+      "kiwi",
+      "lemon",
+      "lime",
+      "mango",
+      "nectarines",
+      "orange",
+      "papaya",
+      "peaches",
+      "pears",
+      "pineapple",
+      "plums",
+      "pomegranate",
+      "raspberries",
+      "strawberries",
+      "watermelon"
+    ]
+  },
+  {
+    "category": "vegetables",
+    "ingredients": [
+      "artichoke",
+      "asparagus",
+      "avocado",
+      "beets",
+      "bell peppers",
+      "broccoli",
+      "brussels sprouts",
+      "cabbage",
+      "carrots",
+      "cauliflower",
+      "celery",
+      "corn",
+      "cucumber",
+      "eggplant",
+      "garlic",
+      "ginger",
+      "green beans",
+      "jicama",
+      "kale",
+      "leeks",
+      "lettuce",
+      "mushrooms",
+      "okra",
+      "onion",
+      "parsnips",
+      "peas",
+      "potatoes",
+      "pumpkin",
+      "radishes",
+      "spinach",
+      "squash",
+      "sweet potato",
+      "tomatoes",
+      "turnips",
+      "yams",
+      "zucchini"
+    ]
+  },
+  {
+    "category": "dairy",
+    "ingredients": [
+      "butter",
+      "cheese",
+      "cream",
+      "eggs",
+      "milk",
+      "sour cream",
+      "yogurt"
+    ]
+  },
+  {
+    "category": "meat",
+    "ingredients": [
+      "bacon",
+      "beef",
+      "chicken",
+      "duck",
+      "goose",
+      "ham",
+      "lamb",
+      "pork",
+      "sausage",
+      "turkey"
+    ]
+  },
+  {
+    "category": "seafood",
+    "ingredients": [
+      "anchovies",
+      "clams",
+      "crab",
+      "lobster",
+      "mussels",
+      "octopus",
+      "oysters",
+      "salmon",
+      "scallops",
+      "shrimp",
+      "squid",
+      "tuna"
+    ]
+  },
+  {
+    "category": "grains",
+    "ingredients": [
+      "barley",
+      "bread",
+      "cornmeal",
+      "flour",
+      "oats",
+      "pasta",
+      "quinoa",
+      "rice",
+      "wheat"
+    ]
+  },
+  {
+    "category": "nuts and seeds",
+    "ingredients": [
+      "almonds",
+      "cashews",
+      "chia seeds",
+      "flaxseed",
+      "hazelnuts",
+      "macadamia nuts",
+      "peanuts",
+      "pecans",
+      "pistachios",
+      "poppy seeds",
+      "pumpkin seeds",
+      "sesame seeds",
+      "sunflower seeds",
+      "walnuts"
+    ]
+  }
+];
+
+
 
 const mock_ingredients=[
   "rhubarb",

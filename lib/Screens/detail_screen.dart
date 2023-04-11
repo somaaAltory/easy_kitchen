@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../Screens/favorites_screen.dart';
-
 class DetailScreen extends StatelessWidget {
   //final RecipeCard recipeCard;
   //  final String name;

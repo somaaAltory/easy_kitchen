@@ -1,6 +1,5 @@
 import 'package:easy_kitchen/helpers/Ingredients.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 
 class IngredientsScreen extends StatefulWidget {
   const IngredientsScreen({Key? key}) : super(key: key);
