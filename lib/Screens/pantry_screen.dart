@@ -1,15 +1,13 @@
-import 'dart:developer';
-
 import 'package:easy_kitchen/helpers/helped_function.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:multi_select_flutter/bottom_sheet/multi_select_bottom_sheet.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
-import './helpers/Ingredients.dart';
-import 'models/barcode_api.dart';
+import '../helpers/Ingredients.dart';
+import '../models/barcode_api.dart';
+import '../models/user.dart';
 
 
 class PantryScreen extends StatefulWidget {
@@ -21,14 +19,22 @@ class PantryScreen extends StatefulWidget {
 }
 
 class _PantryScreenState extends State<PantryScreen> {
+  // final String userId=User.getUserId.userId;
   List ingredientsList = List.empty(growable: true);
-  final db = FirebaseFirestore.instance.collection('pantry');
+  final db = FirebaseFirestore.instance.collection('users');
+  var query ;
+
+//   final citiesRef = db.collection("cities");
+//
+// // Create a query against the collection.
+//   final query = citiesRef.where("state", isEqualTo: "CA");
   late  String barcodeScanNumber = '';
   String title = "";
   String description = "";
   String productName='';
   @override
   void initState() {
+    // query = db.where("id",isEqualTo:User.getUserId.userId);
     super.initState();
     // initIngredients();
   }
@@ -61,14 +67,15 @@ class _PantryScreenState extends State<PantryScreen> {
   }
 
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection("pantry").snapshots(),
+          stream:FirebaseFirestore.instance.collection('pantry').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Text('Something went wrong kkkkkkkkkk');
+              return const Text('Something went wrong kkkkkkkkkk');
             } else if (snapshot.hasData || snapshot.data != null) {
               return ListView.builder(
                   shrinkWrap: true,
@@ -109,7 +116,7 @@ class _PantryScreenState extends State<PantryScreen> {
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-
+        mainAxisSize: MainAxisSize.max,
         children: [
           FloatingActionButton(
             onPressed: () async {

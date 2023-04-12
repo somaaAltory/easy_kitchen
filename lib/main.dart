@@ -1,5 +1,6 @@
 import 'package:easy_kitchen/Screens/main_screen.dart';
 import 'package:easy_kitchen/Screens/login_screen.dart';
+import 'package:easy_kitchen/Screens/my_pantry_screen.dart';
 import 'package:easy_kitchen/Screens/rigester_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

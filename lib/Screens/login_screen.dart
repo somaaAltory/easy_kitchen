@@ -1,6 +1,5 @@
 import 'package:easy_kitchen/Screens/rigester_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../helpers/helped_function.dart';
 
@@ -43,8 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: const Text(
+            const Center(
+              child: Text(
                 "Hello Again!",
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
@@ -104,12 +103,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         email: _emailController.text,
                         password: _passwordController.text,
                         context: context);
-                    print(user);
                     if (user != null) {
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => TabsPage()));
-                      //make new screen
-                      ///????? change navigator
                     }
                   },
                   child: Container(

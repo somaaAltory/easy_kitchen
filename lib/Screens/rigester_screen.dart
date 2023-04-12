@@ -1,11 +1,8 @@
 import 'package:easy_kitchen/Screens/login_screen.dart';
-import 'package:easy_kitchen/models/user.dart';
-import 'package:easy_kitchen/repository/user_repository/user_repository.dart';
 import 'package:easy_kitchen/tabs_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../helpers/helped_function.dart';
-import 'package:get/get.dart';
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/registerScreen';
 
@@ -27,6 +24,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     try {
       // check if password is confirmed
       if (passwordController.text == confirmPasswordController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text
+        );
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => TabsPage()));
       } else {
