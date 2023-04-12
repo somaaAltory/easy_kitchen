@@ -19,7 +19,7 @@ class PantryScreen extends StatefulWidget {
 }
 
 class _PantryScreenState extends State<PantryScreen> {
-  final String userId=User.getUserId.userId;
+  // final String userId=User.getUserId.userId;
   List ingredientsList = List.empty(growable: true);
   final db = FirebaseFirestore.instance.collection('users');
   var query ;
@@ -34,7 +34,7 @@ class _PantryScreenState extends State<PantryScreen> {
   String productName='';
   @override
   void initState() {
-    query = db.where("id",isEqualTo:User.getUserId.userId);
+    // query = db.where("id",isEqualTo:User.getUserId.userId);
     super.initState();
     // initIngredients();
   }
@@ -72,7 +72,7 @@ class _PantryScreenState extends State<PantryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<QuerySnapshot>(
-          stream:db.where("id",isEqualTo:User.getUserId.userId).snapshots(),
+          stream:FirebaseFirestore.instance.collection('pantry').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const Text('Something went wrong kkkkkkkkkk');

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class User {
   static late User _instance;
-  late String userId;
+   late String userId;
 
   User._internal()
   {

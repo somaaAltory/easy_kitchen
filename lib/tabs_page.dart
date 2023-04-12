@@ -48,7 +48,7 @@ class _TabsPageState extends State<TabsPage> {
             icon: Icon(
               Icons.logout,
             )),
-        title: Text(defualtTitle),
+         title: Text(defualtTitle),
         backgroundColor: Theme.of(context).accentColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
