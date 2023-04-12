@@ -1,23 +1,19 @@
-class UserModel
-{
-  final String? id;
-  final String name;
-  final String email;
-  final String password;
 
+import 'package:firebase_auth/firebase_auth.dart';
 
-const UserModel({
-  this.id,
-  required this.email,
-  required this.password,
-  required this.name
-});
+class User {
+  static late User _instance;
+   late String userId;
 
-toJson(){
-  return {
-    "Name":name,
-    "Email":email,
-    "Password":password
-  };
+  User._internal()
+  {
+    userId = (FirebaseAuth.instance.currentUser?.uid!) as String;
+  }
+
+  static User get getUserId {
+    _instance ??= User._internal();
+    return _instance;
+  }
 }
-}
+
+
