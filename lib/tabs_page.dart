@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/favorites_screen.dart';
+import 'features/pantry/presentation/my_pantry_screen.dart';
+import 'features/pantry/presentation/my_pantry_stream.dart';
 
 class TabsPage extends StatefulWidget {
   _TabsPageState createState() => _TabsPageState();
@@ -22,8 +24,7 @@ class _TabsPageState extends State<TabsPage> {
     PantryScreen(),
     RecipeItem(),
     FavoriteScreen(),
-    // PantryScreen(),
-    IngredientsScreen(),
+    MyPantryScreen()
   ];
 
   void _onItemTapped(int index) {
