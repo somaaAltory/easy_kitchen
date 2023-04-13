@@ -1,10 +1,10 @@
-import 'package:easy_kitchen/Screens/categoryScreen.dart';
 import 'package:easy_kitchen/Screens/pantry_screen.dart';
 import 'package:easy_kitchen/views/recipe_item.dart';
 import 'package:easy_kitchen/Screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Screens/favorites_screen.dart';
+import 'features/pantry/presentation/categories_screen.dart';
 
 class TabsPage extends StatefulWidget {
   _TabsPageState createState() => _TabsPageState();
@@ -21,10 +21,7 @@ class _TabsPageState extends State<TabsPage> {
     PantryScreen(),
     RecipeItem(),
     FavoriteScreen(),
-    // PantryScreen(),
-    // IngredientsScreen(),
-    // CategoryWidget()
-      CategoryScreen(),
+    CategoryScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -48,7 +45,7 @@ class _TabsPageState extends State<TabsPage> {
             icon: Icon(
               Icons.logout,
             )),
-         title: Text(defualtTitle),
+        title: Text(defualtTitle),
         backgroundColor: Theme.of(context).accentColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
@@ -60,7 +57,6 @@ class _TabsPageState extends State<TabsPage> {
       bottomNavigationBar: Theme(
         data: ThemeData(canvasColor: Theme.of(context).bottomAppBarColor),
         child: BottomNavigationBar(
-
           selectedItemColor: Theme.of(context).canvasColor,
           type: BottomNavigationBarType.shifting,
           items: const <BottomNavigationBarItem>[

@@ -1,10 +1,11 @@
 import 'package:easy_kitchen/features/pantry/presentation/category_widget.dart';
 import 'package:flutter/material.dart';
-import '../helpers/Ingredients.dart';
-import 'my_pantry_screen.dart';
+import '../../../helpers/Ingredients.dart';
+import './my_pantry_screen.dart';
+
 
 class CategoryScreen extends StatelessWidget {
-   const CategoryScreen({Key? key}) : super(key: key);
+  const CategoryScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -17,15 +18,15 @@ class CategoryScreen extends StatelessWidget {
           ]),
         ),
         body: TabBarView(
-          children:[ ListView.builder(
-              addAutomaticKeepAlives: false,
-              itemCount: ingredientsByCategories.length,
-              itemBuilder: (context, index) {
-                return CategoryWidget(
-                    ingredientsByCategories[index]['category'] as String , ingredientsByCategories[index]['ingredients']as List<String>);
-              }),
-            MyPantryScreen(),
-        ]
+            children:[ ListView.builder(
+                addAutomaticKeepAlives: false,
+                itemCount: ingredientsByCategories.length,
+                itemBuilder: (context, index) {
+                  return CategoryWidget(
+                      ingredientsByCategories[index]['category'] as String , ingredientsByCategories[index]['ingredients']as List<String>);
+                }),
+              const MyPantryScreen(),
+            ]
         ),
 
         // floatingActionButton: FloatingActionButton.extended(
