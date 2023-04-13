@@ -35,9 +35,9 @@ class ingredientsRepository {
   // delete
   Future<void> deleteIngredient(
       {required String uid, required String ingredientId}) async {
-    // delete job
-    final jobRef = _firestore.doc(ingredientPath(uid, ingredientId));
-    await jobRef.delete();
+
+    final ingredientRef = _firestore.doc(ingredientPath(uid, ingredientId));
+    await ingredientRef.delete();
   }
 
   Stream<Ingredient> getIngredient(

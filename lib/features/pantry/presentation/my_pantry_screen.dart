@@ -13,40 +13,71 @@ import 'package:multi_select_flutter/bottom_sheet/multi_select_bottom_sheet.dart
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 
+import 'ingredients_screen_controller.dart';
+
 class MyPantryScreen extends StatelessWidget {
   const MyPantryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
+        body: SingleChildScrollView(
+          child: Column(
       children: [
-        Consumer(
-          builder: (BuildContext context, WidgetRef ref, Widget? child) {
-            final ingredientQuery = ref.watch(ingredientsQueryProvider);
-            return FirestoreListView<Ingredient>(
-              shrinkWrap: true,
-              query: ingredientQuery,
-              itemBuilder: (context, doc) {
-                final ingredient = doc.data();
-                return Dismissible(
-                    key: Key(ingredient.id),
-                    child: Card(
-                      elevation: 4,
-                      child: ListTile(
-                        title: Text(ingredient.name as String),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete),
-                          // color: Colors.red,
-                          onPressed: () {},
-                        ),
-                      ),
-                    ));
-              },
-            );
-          },
-        ),
+          Consumer(
+            builder: (BuildContext context, WidgetRef ref, Widget? child) {
+              final ingredientQuery = ref.watch(ingredientsQueryProvider);
+              return FirestoreListView<Ingredient>(
+                shrinkWrap: true,
+                pageSize: 20,
+                query: ingredientQuery,
+                itemBuilder: (context, doc) {
+                  final ingredient = doc.data();
+                  return ingredientCard(ingredient);
+
+                },
+              );
+            },
+          ),
       ],
-    ));
+    ),
+        ));
   }
+}
+Widget ingredientCard(Ingredient ingredient)
+{
+  return  Consumer(
+    builder: (BuildContext context, WidgetRef ref, Widget? child) {
+      // final  ingredientControllerProvider = ref.watch(ingredientsScreenControllerProvider);
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Card(
+        child: SizedBox(
+          height: 80,
+          child: Padding(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  ingredient.name as String,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                Spacer(),
+                IconButton(
+                  onPressed: () => ref.read(ingredientsScreenControllerProvider.notifier).deleteIngredient(ingredient),
+
+                  icon: Icon(Icons.delete_outline),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.shopping_cart_outlined),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );},
+  );
+
 }
