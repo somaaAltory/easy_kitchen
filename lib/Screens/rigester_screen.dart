@@ -28,8 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             email: emailController.text,
             password: passwordController.text
         );
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => TabsPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => TabsPage()));
       } else {
         // show error message, passwords don't match
         showErrorMessage("Passwords don't match!", context);

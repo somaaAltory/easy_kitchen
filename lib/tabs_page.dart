@@ -45,7 +45,7 @@ class _TabsPageState extends State<TabsPage> {
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => LoginScreen()));
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.logout,
             )),
          title: Text(defualtTitle),
