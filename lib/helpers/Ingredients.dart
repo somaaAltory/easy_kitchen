@@ -35,7 +35,8 @@ const ingredientsByCategories=[
       "raspberries",
       "strawberries",
       "watermelon"
-    ]
+    ],
+    "image":'assets/images/Fruits.jpg' ,
   },
   {
     "category": "vegetables",
@@ -76,7 +77,8 @@ const ingredientsByCategories=[
       "turnips",
       "yams",
       "zucchini"
-    ]
+    ],
+    "image":'assets/images/Vegetables.jpg',
   },
   {
     "category": "dairy",
@@ -88,7 +90,8 @@ const ingredientsByCategories=[
       "milk",
       "sour cream",
       "yogurt"
-    ]
+    ],
+    "image":'assets/images/Dairy.jpg' ,
   },
   {
     "category": "meat",
@@ -103,7 +106,8 @@ const ingredientsByCategories=[
       "pork",
       "sausage",
       "turkey"
-    ]
+    ],
+    "image":'assets/images/Meats.jpg' ,
   },
   {
     "category": "seafood",
@@ -120,7 +124,8 @@ const ingredientsByCategories=[
       "shrimp",
       "squid",
       "tuna"
-    ]
+    ],
+    "image":'assets/images/Seafood.jpg' ,
   },
   {
     "category": "grains",
@@ -134,7 +139,8 @@ const ingredientsByCategories=[
       "quinoa",
       "rice",
       "wheat"
-    ]
+    ],
+    "image":'assets/images/Grains.jpg',
   },
   {
     "category": "nuts and seeds",
@@ -153,7 +159,8 @@ const ingredientsByCategories=[
       "sesame seeds",
       "sunflower seeds",
       "walnuts"
-    ]
+    ],
+    "image":'assets/images/NutsAndSeeds.jpg' ,
   }
 ];
 

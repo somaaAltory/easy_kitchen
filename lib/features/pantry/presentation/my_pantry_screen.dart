@@ -28,13 +28,13 @@ class MyPantryScreen extends StatelessWidget {
             builder: (BuildContext context, WidgetRef ref, Widget? child) {
               final ingredientQuery = ref.watch(ingredientsQueryProvider);
               return FirestoreListView<Ingredient>(
-                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                 shrinkWrap: true,
                 pageSize: 20,
                 query: ingredientQuery,
                 itemBuilder: (context, doc) {
                   final ingredient = doc.data();
                   return ingredientCard(ingredient);
-
                 },
               );
             },
@@ -50,27 +50,27 @@ Widget ingredientCard(Ingredient ingredient)
     builder: (BuildContext context, WidgetRef ref, Widget? child) {
       // final  ingredientControllerProvider = ref.watch(ingredientsScreenControllerProvider);
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Card(
         child: SizedBox(
           height: 80,
           child: Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: Row(
               children: <Widget>[
                 Text(
                   ingredient.name as String,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
                   onPressed: () => ref.read(ingredientsScreenControllerProvider.notifier).deleteIngredient(ingredient),
 
-                  icon: Icon(Icons.delete_outline),
+                  icon: const Icon(Icons.delete_outline),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.shopping_cart_outlined),
+                  icon: const Icon(Icons.shopping_cart_outlined),
                 ),
               ],
             ),
