@@ -23,7 +23,8 @@ class CategoryScreen extends StatelessWidget {
                 itemCount: ingredientsByCategories.length,
                 itemBuilder: (context, index) {
                   return CategoryWidget(
-                      ingredientsByCategories[index]['category'] as String , ingredientsByCategories[index]['ingredients']as List<String>);
+                      ingredientsByCategories[index]['category'] as String , ingredientsByCategories[index]['ingredients']as List<String>,
+                      ingredientsByCategories[index]['image'] as String , );
                 }),
               const MyPantryScreen(),
             ]
