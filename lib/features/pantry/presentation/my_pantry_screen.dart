@@ -20,8 +20,7 @@ class MyPantryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
+    return  SingleChildScrollView(
           child: Column(
       children: [
           Consumer(
@@ -41,7 +40,7 @@ class MyPantryScreen extends StatelessWidget {
           ),
       ],
     ),
-        ));
+        );
   }
 }
 Widget ingredientCard(Ingredient ingredient)
