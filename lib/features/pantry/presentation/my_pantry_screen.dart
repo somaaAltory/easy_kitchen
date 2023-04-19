@@ -41,7 +41,13 @@ class MyPantryScreen extends StatelessWidget {
           ),
       ],
     ),
-        ));
+        ),
+
+
+
+    );
+
+
   }
 }
 Widget ingredientCard(Ingredient ingredient)
@@ -60,6 +66,11 @@ Widget ingredientCard(Ingredient ingredient)
               children: <Widget>[
                 Text(
                   ingredient.name as String,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                Spacer(),
+                Text(
+                ingredient.expirationDate!.toDate().weekday.toString(),
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
                 Spacer(),

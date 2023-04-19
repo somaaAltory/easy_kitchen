@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:multi_select_flutter/dialog/mult_select_dialog.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 
+import 'date_widget.dart';
 import 'ingredients_screen_controller.dart';
 
 class CategoryWidget extends StatefulWidget {
@@ -24,6 +25,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   List<MultiSelectCard> multiSelectItemList= [];
 
   List<MultiSelectCard> minMultiSelectItemList= [];
+
+  final MultiSelectController<dynamic> _controller = MultiSelectController(
+      deSelectPerpetualSelectedItems: true
+  );
 
    late int  itemCountToShow ;
 
@@ -59,7 +64,9 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                 ),
                 Consumer(
                   builder: (BuildContext context, WidgetRef ref, Widget? child) {
+
                   return MultiSelectContainer(
+                      controller: _controller,
                       itemsDecoration: MultiSelectDecorations(
                           decoration: BoxDecoration(
                               color: Colors.grey.withOpacity(0.07),
@@ -72,14 +79,13 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                               // border: Border.all(color: Colors.grey[500]!),
                               borderRadius: BorderRadius.circular(10)),
                       ),
+
                       items:minMultiSelectItemList ,
-                   onChange: (allSelectedItems, selectedItem) {
-                     // MultiSelectDialog(
-                     //   items: ["week","month"].map((e) => MultiSelectItem<String>(e,e)).toList(),
-                     //   onConfirm: (values) {}, initialValue: [],
-                     // );
+                   onChange: (allSelectedItems, selectedItem) async  {
                         String select = selectedItem.toString();
-                        ref.read(ingredientsScreenControllerProvider.notifier).addIngredient(select);
+                        var dateTime = await dateTimeForm(context);
+                        _controller.deselectAll();
+                        ref.read(ingredientsScreenControllerProvider.notifier).addIngredient(select,dateTime!);
 
                    });},
                 ),
@@ -104,5 +110,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   }
 
 }
+
+
 
 
