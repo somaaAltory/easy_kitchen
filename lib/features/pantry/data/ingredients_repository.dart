@@ -20,11 +20,13 @@ class ingredientsRepository {
 
   // create
   Future<void> addIngredient({required String uid,
-    required String name,
+    required String name, required DateTime expirationDate
    }) =>
       _firestore.collection(pantryPath(uid)).add({
         'name': name,
+        'expirationDate':expirationDate
       });
+
 
   // update
   Future<void> updateIngredient(
@@ -63,7 +65,7 @@ class ingredientsRepository {
       _firestore.collection(pantryPath(uid)).withConverter(
         fromFirestore: (snapshot, _) =>
             Ingredient.fromMap(snapshot.data()!, snapshot.id),
-        toFirestore: (job, _) => job.toMap(),
+        toFirestore: (ingredient, _) => ingredient.toMap(),
       );
 
   Future<List<Ingredient>> fetchIngredients({required String uid}) async {
@@ -71,17 +73,19 @@ class ingredientsRepository {
     return ingredient.docs.map((doc) => doc.data()).toList();
   }
 }
-final ingredientListProvider = Provider<Future<List<Ingredient>>>((ref) {
-  final user = ref.watch(authStateChangesProvider).value;
-  if (user == null) {
-    throw AssertionError('User can\'t be null');
-  }
-  final repository = ref.watch(ingredientsRepositoryProvider);
-  return repository.fetchIngredients(uid: user.uid);
+// final ingredientListProvider = Provider<Future<List<Ingredient>>>((ref) {
+//   final user = ref.watch(authStateChangesProvider).value;
+//   if (user == null) {
+//     throw AssertionError('User can\'t be null');
+//   }
+//   final repository = ref.watch(ingredientsRepositoryProvider);
+//   return repository.fetchIngredients(uid: user.uid);
+//
+// });
 
+final ingredientsRepositoryProvider = Provider<ingredientsRepository>((ref) {
+  return ingredientsRepository(FirebaseFirestore.instance);
 });
-
-
 
 final ingredientsStreamProvider = StreamProvider.autoDispose<List<Ingredient>>((ref) {
   final user = ref.watch(authStateChangesProvider).value;
@@ -116,9 +120,7 @@ StreamProvider.autoDispose.family<Ingredient, String>((ref, jobId) {
 });
 
 
-final ingredientsRepositoryProvider = Provider<ingredientsRepository>((ref) {
-  return ingredientsRepository(FirebaseFirestore.instance);
-});
+
 
 
 

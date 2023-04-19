@@ -1,7 +1,10 @@
 import 'package:easy_kitchen/features/pantry/presentation/category_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../helpers/Ingredients.dart';
 import './my_pantry_screen.dart';
+import 'ingredients_screen_controller.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -30,20 +33,33 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BuildCategoriesScreenBody(isButton1Pressed: _isPantryButtonPressed,isButton2Pressed: _isMyPantryButtonPressed,),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            floatingButtonWidget(context,'Pantry',(){
-              updateMyPantryButtonState(false);
-              updatePantryButtonState(true);
-            }),
-            floatingButtonWidget(context,'My pantry',(){
-               updatePantryButtonState(false);
-              updateMyPantryButtonState(true);
-            })
-          ],
-        ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          floatingButtonWidget(context,'Pantry',(){
+            updateMyPantryButtonState(false);
+            updatePantryButtonState(true);
+          }),
+          Consumer(
+            builder: (BuildContext context, WidgetRef ref, Widget? child) {
+              return
+              FloatingActionButton(onPressed: () async {
+                String barcodeNumber = await scanBarcode();
+                ref.read(ingredientsScreenControllerProvider.notifier).addIngredientByScanCode(barcodeNumber);
+
+              },
+                child: Icon(Icons.camera,),);
+
+            }
+          ),
+          floatingButtonWidget(context,'My pantry',(){
+            updatePantryButtonState(false);
+            updateMyPantryButtonState(true);
+          }),
+
+        ],
+      ),
     );
   }
 }
@@ -64,15 +80,15 @@ class BuildCategoriesScreenBody extends StatelessWidget {
     }
     else{
       return ListView.builder(
-        addAutomaticKeepAlives: false,
-        itemCount: ingredientsByCategories.length,
-        itemBuilder: (context, index) {
-          return CategoryWidget(
-            ingredientsByCategories[index]['category'] as String,
-            ingredientsByCategories[index]['ingredients'] as List<String>,
-            ingredientsByCategories[index]['image'] as String,
-          );
-        });
+          addAutomaticKeepAlives: false,
+          itemCount: ingredientsByCategories.length,
+          itemBuilder: (context, index) {
+            return CategoryWidget(
+              ingredientsByCategories[index]['category'] as String,
+              ingredientsByCategories[index]['ingredients'] as List<String>,
+              ingredientsByCategories[index]['image'] as String,
+            );
+          });
     }
   }
 }
@@ -85,7 +101,7 @@ Widget floatingButtonWidget(context,String buttonText,Function onPress)
       onPressed: () {},
       style: ButtonStyle(
         padding: MaterialStateProperty.all<EdgeInsets>(
-          const EdgeInsets.symmetric(horizontal: 16.0),
+          const EdgeInsets.symmetric(horizontal: 5.0),
         ),
         backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).accentColor),
         shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -107,4 +123,10 @@ Widget floatingButtonWidget(context,String buttonText,Function onPress)
       ),
     ),
   );
+
+}
+Future<String> scanBarcode() async {
+  String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", false, ScanMode.DEFAULT);
+  var barcodeScanNumber = barcodeScanRes ;
+  return barcodeScanNumber;
 }

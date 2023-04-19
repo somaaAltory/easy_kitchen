@@ -18,10 +18,10 @@ class _TabsPageState extends State<TabsPage> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    PantryScreen(),
+    CategoryScreen(),
     RecipeItem(),
     FavoriteScreen(),
-    CategoryScreen(),
+    PantryScreen(),
   ];
 
   void _onItemTapped(int index) {
