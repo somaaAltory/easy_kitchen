@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 Future<DateTime?> dateTimeForm(context) async {
   DateTime dateTime = DateTime.now() ;
+  bool isDateSelected = false;
   return await showDialog<DateTime>(
     context: context,
     builder: (BuildContext context) => AlertDialog(
@@ -19,16 +20,17 @@ Future<DateTime?> dateTimeForm(context) async {
           dateTextStyle: const TextStyle(fontWeight: FontWeight.bold),
           onDateSelected: (DateTime value){
             dateTime=value;
+            isDateSelected = true;
           },
         ),
       ),
       actions: <Widget>[
         TextButton(
-          onPressed: () => Navigator.pop(context, 'Cancel'),
+          onPressed: () => Navigator.pop(context, null),
           child: const Text('Cancel'),
         ),
         TextButton(
-          onPressed: () => Navigator.pop(context, dateTime),
+          onPressed: () => isDateSelected ? Navigator.pop(context, dateTime) : Navigator.pop(context, null),
           child: const Text('OK'),
         ),
       ],

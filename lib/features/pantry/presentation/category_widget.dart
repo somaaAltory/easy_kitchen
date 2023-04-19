@@ -1,11 +1,9 @@
-import 'package:easy_kitchen/Screens/categoryScreen.dart';
-import 'package:easy_kitchen/Screens/my_pantry_screen.dart';
+
 import 'package:easy_kitchen/helpers/Ingredients.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:multi_select_flutter/dialog/mult_select_dialog.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
+
 
 import 'date_widget.dart';
 import 'ingredients_screen_controller.dart';
@@ -13,7 +11,8 @@ import 'ingredients_screen_controller.dart';
 class CategoryWidget extends StatefulWidget {
    String categoryName;
    List<String> ingredients;
-   CategoryWidget(this.categoryName,this.ingredients);
+   String imageUrl;
+   CategoryWidget(this.categoryName,this.ingredients,this.imageUrl);
 
 
   @override
@@ -50,9 +49,9 @@ class _CategoryWidgetState extends State<CategoryWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                const ListTile(
-                  leading: Image(image: NetworkImage('https://raw.githubusercontent.com/jch28/Super-Cook/master/src/images/Vegetables.orig.png')),
-                  title: Text('category'),
+                 ListTile(
+                  leading: Image.asset(widget.imageUrl),
+                  title:  Text(widget.categoryName),
 
                 ),
                 const SizedBox(height: 20,),
@@ -85,7 +84,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         String select = selectedItem.toString();
                         var dateTime = await dateTimeForm(context);
                         _controller.deselectAll();
-                        ref.read(ingredientsScreenControllerProvider.notifier).addIngredient(select,dateTime!);
+                        if(dateTime != null) {
+                          ref.read(ingredientsScreenControllerProvider.notifier)
+                              .addIngredient(select, dateTime!);
+                        }
 
                    });},
                 ),
