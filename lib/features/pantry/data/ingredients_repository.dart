@@ -73,15 +73,7 @@ class ingredientsRepository {
     return ingredient.docs.map((doc) => doc.data()).toList();
   }
 }
-// final ingredientListProvider = Provider<Future<List<Ingredient>>>((ref) {
-//   final user = ref.watch(authStateChangesProvider).value;
-//   if (user == null) {
-//     throw AssertionError('User can\'t be null');
-//   }
-//   final repository = ref.watch(ingredientsRepositoryProvider);
-//   return repository.fetchIngredients(uid: user.uid);
-//
-// });
+
 
 final ingredientsRepositoryProvider = Provider<ingredientsRepository>((ref) {
   return ingredientsRepository(FirebaseFirestore.instance);

@@ -38,12 +38,6 @@ class _RecipeItemState extends State<RecipeItem> {
           itemBuilder: (context, index) {
             return RecipeCard(
               recipe: _recipes[index],
-                // title: _recipes[index].title,
-                // id: _recipes[index].id,
-                // thumbnailUrl: _recipes[index].images,
-                // extendedIngredients:_recipes[index].extendedIngredients,
-                // duration: _recipes[index].duration,
-                // isCheap: _recipes[index].isCheap,
             );
           },
         ));
