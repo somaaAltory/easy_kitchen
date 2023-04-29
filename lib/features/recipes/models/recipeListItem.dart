@@ -22,13 +22,16 @@ class RecipeListItem {
     );
   }
   static List<RecipeListItem> recipeListFromJson(dynamic data) {
-    return data.map(
-      (recipeItem) => RecipeListItem(
-          id: recipeItem["id"],
-          title: recipeItem["title"],
-          image: recipeItem["image"],
-          missedIngredientCount: recipeItem["missedIngredientCount"],
-          usedIngredientCount: recipeItem["usedIngredientCount"]),
-    );
+    print("this is the data $data");
+    List<RecipeListItem> list=[] ;
+     data.map(
+      (recipeItem) {
+        print("this is the item $recipeItem");
+        list.add( RecipeListItem.fromJson(data));
+
+      }
+       );
+     print("this is the list $list");
+     return list;
   }
 }

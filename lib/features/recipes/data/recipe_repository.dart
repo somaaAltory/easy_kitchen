@@ -27,7 +27,7 @@ class RecipeRepository {
       String ingredients) async {
     return _getData(
       uri: _spoonaCularAPI.getRecipeByIngredients(recipesNumber, ingredients),
-      builder: (data) => RecipeListItem.recipeListFromJson(data),
+      builder: (data) => RecipeListItem.recipeListFromJson(data['results']),
     );
   }
 
@@ -35,22 +35,22 @@ class RecipeRepository {
     required Uri uri,
     required T Function(dynamic data) builder,
   }) async {
-    try {
+    // try {
       final response = await _client.get(uri);
-      switch (response.statusCode) {
-        case 200:
+      // switch (response.statusCode) {
+      //   case 200:
           final data = json.decode(response.body);
           return builder(data);
-        case 401:
+        //case 401:
           throw Exception("Unauthorized");
-        case 404:
+       // case 404:
           throw Exception("Not found!");
-        default:
+      //  default:
           throw Exception("UnKnown");
-      }
-    } on SocketException catch (_) {
-      rethrow;
-    }
+      // }
+    // } on SocketException catch (_) {
+    //   rethrow;
+    // }
   }
 }
   final recipeRepositoryProvider=Provider<RecipeRepository>((ref){
@@ -71,7 +71,7 @@ class RecipeRepository {
     return ingredients;
   }
 
-  final recipesByIngredientsProvider = Provider <Future<List<RecipeListItem>>>((ref) {
+  final recipesByIngredientsProvider = Provider <Future<List<RecipeListItem>>>((ref) async {
     final user = ref.read(authRepositoryProvider).currentUser;
     final recipeRepository=ref.watch(recipeRepositoryProvider);
     if (user == null) {
@@ -80,7 +80,8 @@ class RecipeRepository {
     final repository = ref.watch(ingredientsRepositoryProvider);
       var fetchIngredients = repository.fetchIngredients(uid: user.uid);
        var listItemToString = convertListItemToString(fetchIngredients);
-       return recipeRepository.getRecipes('3' , listItemToString as String);
+       String ingredientsAsString = await listItemToString;
+       return recipeRepository.getRecipes('3' , ingredientsAsString);
   });
     
 
