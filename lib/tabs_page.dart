@@ -4,7 +4,7 @@ import 'package:easy_kitchen/Screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Screens/favorites_screen.dart';
-import 'Screens/ingredients_screen.dart';
+import 'features/recipes/presentation/recipes_screen.dart';
 import 'features/pantry/presentation/categories_screen.dart';
 
 class TabsPage extends StatefulWidget {
@@ -21,7 +21,7 @@ class _TabsPageState extends State<TabsPage> {
   static const List<Widget> _widgetOptions = <Widget>[
     CategoryScreen(),
     RecipeItem(),
-    IngredientsScreen(),
+    RecipesScreen(),
     // FavoriteScreen(),
     PantryScreen(),
   ];
@@ -44,7 +44,7 @@ class _TabsPageState extends State<TabsPage> {
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => LoginScreen()));
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.logout,
             )),
         title: Text(defualtTitle),

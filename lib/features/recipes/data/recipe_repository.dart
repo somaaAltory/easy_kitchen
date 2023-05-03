@@ -10,7 +10,6 @@ import 'package:http/http.dart' as http;
 import '../../../models/recipe.dart';
 import '../../authentication/data/firebase_auth_repository.dart';
 import '../../pantry/data/ingredients_repository.dart';
-import '../models/recipeList.dart';
 
 class RecipeRepository {
   final http.Client _client;
@@ -18,17 +17,35 @@ class RecipeRepository {
 
   RecipeRepository(this._client, this._spoonaCularAPI);
 
-  Future<Recipe> getRecipeDetails(String id) =>
+  Future<Recipe> getRecipeDetails(int id) =>
       _getData(
           uri: _spoonaCularAPI.recipesDetails(id),
           builder: (data) => Recipe.fromJson(data));
 
-  Future<List<RecipeListItem>> getRecipes(String recipesNumber,
+  Future<List<RecipeListItem>> getRecipes(int recipesNumber,
       String ingredients) async {
-    return _getData(
-      uri: _spoonaCularAPI.getRecipeByIngredients(recipesNumber, ingredients),
-      builder: (data) => RecipeListItem.recipeListFromJson(data['results']),
-    );
+    try {
+      final uri = _spoonaCularAPI.getRecipeByIngredients(recipesNumber, ingredients);
+      return _getData(
+        uri: uri,
+        builder: (data) => RecipeListItem.recipeListFromJson(data),
+      );
+    } catch (e) {
+      print('Error getting recipes: $e');
+       return Future.error('Error getting recipes: $e');
+    }
+    //  Uri uri=_spoonaCularAPI.getRecipeByIngredients(recipesNumber, ingredients);
+    //  print("uriiiiiiii$uri");
+    // // // print("this is the fetchIngredients : ${_spoonaCularAPI.getRecipeByIngredients(recipesNumber, ingredients)}");
+    // return _getData(
+    //   uri: _spoonaCularAPI.getRecipeByIngredients(recipesNumber, ingredients),
+    //   // builder: (data) => RecipeListItem.recipeListFromJson(data['results']),
+    //
+    //
+    //   //we do findByIngredients so => the result return as aList which mean
+    //   // it can be accessed by the data variable
+    //   builder: (data) => RecipeListItem.recipeListFromJson(data),
+    // );
   }
 
   Future<T> _getData<T>({
@@ -79,10 +96,18 @@ class RecipeRepository {
     }
     final repository = ref.watch(ingredientsRepositoryProvider);
       var fetchIngredients = repository.fetchIngredients(uid: user.uid);
+
        var listItemToString = convertListItemToString(fetchIngredients);
+
        String ingredientsAsString = await listItemToString;
-       return recipeRepository.getRecipes('3' , ingredientsAsString);
+    // print("this is the fetchIngredients : $ingredientsAsString");
+       return recipeRepository.getRecipes(4 , ingredientsAsString);
   });
+
+// final configProvider = FutureProvider<Recipe>((ref,id) async {
+//
+//   return await recipeRepositoryProvider.;
+// });
     
 
 

@@ -12,7 +12,7 @@ class RecipeListItem {
       required this.missedIngredientCount,
       required this.usedIngredientCount});
 
-  factory RecipeListItem.fromJson(dynamic data) {
+  factory RecipeListItem.fromJson(Map<String, Object> data) {
     return RecipeListItem(
       id: data['id'] as int,
       title: data['title'] as String,
@@ -21,17 +21,21 @@ class RecipeListItem {
       missedIngredientCount: data['missedIngredientCount'] as int,
     );
   }
-  static List<RecipeListItem> recipeListFromJson(dynamic data) {
-    print("this is the data $data");
-    List<RecipeListItem> list=[] ;
-     data.map(
-      (recipeItem) {
-        print("this is the item $recipeItem");
-        list.add( RecipeListItem.fromJson(data));
+  static List<RecipeListItem> recipeListFromJson(List data) {
+    // print("this is the data $data");
+    List<RecipeListItem> list = [];
+    for (var element in data) {
+      list.add(createRecipeListItem(element));
+    }
+    return list;
+  }
 
-      }
-       );
-     print("this is the list $list");
-     return list;
+  static RecipeListItem createRecipeListItem(dynamic recipeItem) {
+    return RecipeListItem(
+        id: recipeItem["id"],
+        title: recipeItem["title"],
+        image: recipeItem["image"],
+        missedIngredientCount: recipeItem["missedIngredientCount"],
+        usedIngredientCount: recipeItem["usedIngredientCount"]);
   }
 }

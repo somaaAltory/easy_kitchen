@@ -6,21 +6,21 @@ class SpoonaCularAPI {
   static const String _apiBaseUrl = "api.spoonacular.com";
   static const String _apiPath = "/recipes/";
 
-  Uri searchRecipes(String recipesNumber) => _buildUri(
+  Uri searchRecipes(int recipesNumber) => _buildUri(
         endpoint: "complexSearch",
         parametersBuilder: () => recipeQueryParameters(recipesNumber),
       );
-  Uri recipesDetails(String id) => _buildUri(
+  Uri recipesDetails(int id) => _buildUri(
         endpoint: "$id/information",
         parametersBuilder: () => recipesDetailsQueryParameters(),
       );
 
-  Uri getRecipeByIngredients(
-          String recipesNumber, String ingredients) =>
-      _buildUri(
+  Uri getRecipeByIngredients(int recipesNumber, String ingredients) {
+      return _buildUri(
           endpoint: "findByIngredients",
           parametersBuilder: () =>
-              recipeByIngredientsQueryParameters(recipesNumber, ingredients));
+              recipeByIngredientsQueryParameters(recipesNumber, ingredients));}
+
 
   Uri _buildUri({
     required String endpoint,
@@ -34,15 +34,18 @@ class SpoonaCularAPI {
     );
   }
 
+  // https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,
+  // +sugar&number=2&apiKey=b13abb543b844c47b376b12b186fdd6a
   Map<String, dynamic> recipeByIngredientsQueryParameters(
-          String recipesNumber, String ingredients) =>
+          int recipesNumber, String ingredients) =>
+      //number
       {
-        "number": recipesNumber,
-        "apiKey": apiKey,
+        "number": recipesNumber.toString(),
         "ingredients": ingredients,
+        "apiKey": apiKey,
       };
 
-  Map<String, dynamic> recipeQueryParameters(String recipesNumber) => {
+  Map<String, dynamic> recipeQueryParameters(int recipesNumber) => {
         "number": recipesNumber,
         "apiKey": apiKey,
       };
