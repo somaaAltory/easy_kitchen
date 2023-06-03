@@ -1,9 +1,12 @@
 import 'package:easy_kitchen/Screens/pantry_screen.dart';
+import 'package:easy_kitchen/features/shopping/presentation/shopping_screen.dart';
 import 'package:easy_kitchen/views/recipe_item.dart';
 import 'package:easy_kitchen/Screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Screens/favorites_screen.dart';
+import 'features/favorites/presentation/favorite_screen.dart';
+import 'features/recipes/presentation/recipes_screen.dart';
 import 'features/pantry/presentation/categories_screen.dart';
 
 class TabsPage extends StatefulWidget {
@@ -17,11 +20,13 @@ class _TabsPageState extends State<TabsPage> {
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
+  static  List<Widget> _widgetOptions = <Widget>[
     CategoryScreen(),
-    RecipeItem(),
+    // RecipeItem(),
+     RecipesScreen(),
     FavoriteScreen(),
-    PantryScreen(),
+    ShoppingScreen(),
+    // PantryScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -42,7 +47,7 @@ class _TabsPageState extends State<TabsPage> {
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => LoginScreen()));
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.logout,
             )),
         title: Text(defualtTitle),

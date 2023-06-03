@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-class barodeRepository {
-  barodeRepository(this._client);
+class BarcodeRepository {
+  BarcodeRepository(this._client);
   final http.Client _client;
   //final String _api;
   Future<String> getProductName(String barcode) async {
@@ -20,6 +20,6 @@ class barodeRepository {
   }
 }
 
-final barcodeRepositoryProvider = Provider<barodeRepository>((ref) {
-  return barodeRepository(http.Client());
+final barcodeRepositoryProvider = Provider<BarcodeRepository>((ref) {
+  return BarcodeRepository(http.Client());
 });

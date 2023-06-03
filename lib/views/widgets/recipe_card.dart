@@ -8,22 +8,10 @@ import '../../Screens/detail_screen.dart';
 
 class RecipeCard extends StatelessWidget {
    final Recipe recipe;
-  // final String title;
-  // final int id;
-  // final String thumbnailUrl;
-  // final List extendedIngredients;
-  // final bool isCheap;
-  // final int duration;
 
 
   RecipeCard({
      required this.recipe
-    // required this.title,
-    // required this.id,
-    // required this.thumbnailUrl,
-    // required this.extendedIngredients,
-    // required this.duration,
-    // required this.isCheap
   });
 
   final List<bool> selection=<bool>[false];
@@ -38,13 +26,13 @@ class RecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => DetailScreen(
-                    this.recipe.title, this.recipe.extendedIngredients, this.recipe.images),
-            ),
-        );
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (BuildContext context) => DetailScreen(
+        //             this.recipe.title, this.recipe.extendedIngredients, this.recipe.images),
+        //     ),
+        // );
       },
       child: Card(
         shape: RoundedRectangleBorder(

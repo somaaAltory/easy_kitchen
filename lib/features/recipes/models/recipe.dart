@@ -13,7 +13,7 @@ class Recipe {
   Recipe(
       {required this.id,
         required this.title,
-       required this.images,
+        required this.images,
         required this.extendedIngredients,
         required this.isVegetarian,
         required this.isVegan,
@@ -21,20 +21,20 @@ class Recipe {
         required this.isDairyFree,
         required this.isCheap,
         required this.duration,
-     });
+      });
 
-  factory Recipe.fromJson(dynamic json) {
+  factory Recipe.fromJson(dynamic data) {
     return Recipe(
-        id: json['id'] as int,
-        title: json['title'] as String,
-        images: json['image']as String,
-        extendedIngredients: json['extendedIngredients'] as List,
-        duration: json['readyInMinutes'] as int,
-        isVegan: json['vegan'] as bool,
-        isVegetarian: json['vegetarian']as bool,
-        isDairyFree: json['dairyFree']as bool,
-        isCheap: json['cheap'] as bool,
-         isGlutenFree: json['glutenFree'] as bool
+        id: data['id'] as int,
+        title: data['title'] as String,
+        images: data['image']as String,
+        extendedIngredients: data['extendedIngredients'] as List,
+        duration: data['readyInMinutes'] as int,
+        isVegan: data['vegan'] as bool,
+        isVegetarian: data['vegetarian']as bool,
+        isDairyFree: data['dairyFree']as bool,
+        isCheap: data['cheap'] as bool,
+        isGlutenFree: data['glutenFree'] as bool
     );
   }
 
