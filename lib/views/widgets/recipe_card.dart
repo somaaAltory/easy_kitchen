@@ -26,13 +26,13 @@ class RecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => DetailScreen(
-                    this.recipe.title, this.recipe.extendedIngredients, this.recipe.images),
-            ),
-        );
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (BuildContext context) => DetailScreen(
+        //             this.recipe.title, this.recipe.extendedIngredients, this.recipe.images),
+        //     ),
+        // );
       },
       child: Card(
         shape: RoundedRectangleBorder(

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/recipe_repository.dart';
 
-class RecipesScreen extends ConsumerWidget {
+class RecipesScreen extends ConsumerWidget{
   const RecipesScreen({Key? key}) : super(key: key);
 
   @override

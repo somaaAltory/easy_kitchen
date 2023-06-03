@@ -1,17 +1,11 @@
-import 'dart:developer';
 
 import 'package:easy_kitchen/features/pantry/data/ingredients_repository.dart';
 import 'package:easy_kitchen/features/pantry/models/ingredient.dart';
-import 'package:easy_kitchen/helpers/helped_function.dart';
+import 'package:easy_kitchen/features/shopping/data/shoppingList.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:multi_select_flutter/bottom_sheet/multi_select_bottom_sheet.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
-import 'package:multi_select_flutter/util/multi_select_list_type.dart';
+import 'package:intl/intl.dart';
 
 import 'ingredients_screen_controller.dart';
 
@@ -63,17 +57,24 @@ Widget ingredientCard(Ingredient ingredient)
                   ),
                   const Spacer(),
                   Text(
-                    ingredient.expirationDate!.toDate().day.toString(),
+                     // ingredient.expirationDate!.toDate().day.toString(),
+                     DateFormat.MMMMd().format(DateTime.fromMicrosecondsSinceEpoch(ingredient.expirationDate!.microsecondsSinceEpoch)),
                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                  const Spacer(),
+
                   IconButton(
                     onPressed: () => ref.read(ingredientsScreenControllerProvider.notifier).deleteIngredient(ingredient),
 
                     icon: const Icon(Icons.delete_outline),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+
+                      var ingredientName = myShoppingList.where((element) => element== (ingredient.name as String)) ;
+                      if(ingredientName.isEmpty) {
+                        myShoppingList.add(ingredient.name);
+                      }
+                    },
                     icon: const Icon(Icons.shopping_cart_outlined),
                   ),
                 ],

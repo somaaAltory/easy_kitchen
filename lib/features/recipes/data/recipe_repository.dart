@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:easy_kitchen/features/pantry/models/ingredient.dart';
 import 'package:easy_kitchen/features/recipes/api/spoonacular_api.dart';
+import 'package:easy_kitchen/features/recipes/models/recipe.dart';
 import 'package:easy_kitchen/features/recipes/models/recipeListItem.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../models/recipe.dart';
 import '../../authentication/data/firebase_auth_repository.dart';
 import '../../pantry/data/ingredients_repository.dart';
 
@@ -104,10 +104,7 @@ class RecipeRepository {
        return recipeRepository.getRecipes(4 , ingredientsAsString);
   });
 
-// final configProvider = FutureProvider<Recipe>((ref,id) async {
-//
-//   return await recipeRepositoryProvider.;
-// });
+// final configProvider = FutureProvider<Recipe>((ref) async => await recipeRepositoryProvider.);
     
 
 

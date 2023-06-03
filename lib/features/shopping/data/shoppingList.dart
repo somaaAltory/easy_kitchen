@@ -1,0 +1,2 @@
+List myShoppingList=[];
+List boughtIngredientList=[];
