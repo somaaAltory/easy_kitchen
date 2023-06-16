@@ -30,12 +30,21 @@ class RecipeListItem {
     return list;
   }
 
+  static List<RecipeListItem> recipeListComplexFromJson(var data) {
+    // print("this is the data $data");
+    List<RecipeListItem> list = [];
+    for (var element in data['results']) {
+      list.add(createRecipeListItem(element));
+    }
+    return list;
+  }
+
   static RecipeListItem createRecipeListItem(dynamic recipeItem) {
     return RecipeListItem(
         id: recipeItem["id"],
         title: recipeItem["title"],
         image: recipeItem["image"],
-        missedIngredientCount: recipeItem["missedIngredientCount"],
-        usedIngredientCount: recipeItem["usedIngredientCount"]);
+        missedIngredientCount: 0,
+        usedIngredientCount: 0);
   }
 }

@@ -3,6 +3,7 @@ class Recipe {
   final String title;
   final String images;
   final List extendedIngredients;
+  final List analyzedInstructions;
   final bool isVegetarian;
   final bool isVegan;
   final bool isGlutenFree;
@@ -15,6 +16,7 @@ class Recipe {
         required this.title,
         required this.images,
         required this.extendedIngredients,
+        required this.analyzedInstructions,
         required this.isVegetarian,
         required this.isVegan,
         required this.isGlutenFree,
@@ -29,6 +31,8 @@ class Recipe {
         title: data['title'] as String,
         images: data['image']as String,
         extendedIngredients: data['extendedIngredients'] as List,
+        analyzedInstructions: data['analyzedInstructions'] as List,
+        //analyzedInstructions[0].steps
         duration: data['readyInMinutes'] as int,
         isVegan: data['vegan'] as bool,
         isVegetarian: data['vegetarian']as bool,

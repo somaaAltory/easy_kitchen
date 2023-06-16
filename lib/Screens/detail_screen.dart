@@ -4,15 +4,10 @@ import 'package:flutter/material.dart';
 
 
 class DetailScreen extends StatelessWidget {
-  //final RecipeCard recipeCard;
-  //  final String name;
-  // final String thumbnailUr;
-  // final List extendedIngredients;
-  // final String title;
+    final String title;
     final Future<Recipe> recipe;
 
-   // DetailScreen(this.title, this.extendedIngredients, this.thumbnailUr);
-   const DetailScreen(this.recipe, {Key? key});
+   const DetailScreen(this.recipe,this.title ,{Key? key}) : super(key: key);
   //
   
   
@@ -25,7 +20,7 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-  Widget buildContainer(Widget child) {
+  Widget buildContainer(Widget child,var mediaQuery) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -34,8 +29,8 @@ class DetailScreen extends StatelessWidget {
       ),
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
-      height: 150,
-      width: 300,
+      height:mediaQuery.height*0.55,
+      width: mediaQuery.width*0.9,
       child: child,
     );
   }
@@ -43,10 +38,14 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuerySize= MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).accentColor,
-        title: Text("title"),
+        title: Text(title,
+            style: const TextStyle(
+              fontSize: 18.0,
+            )),
       ),
 
       body: FutureBuilder<Recipe>(
@@ -55,9 +54,10 @@ class DetailScreen extends StatelessWidget {
         return snapshot.hasData? SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              SizedBox(height: mediaQuerySize.height*0.01,),
               Container(
-                height: 300,
-                width: double.infinity,
+                height: mediaQuerySize.height*0.2,
+                width: mediaQuerySize.width*0.7,
                 child: Image.network(snapshot.data!.images,
                 fit: BoxFit.cover,
                 )
@@ -73,9 +73,26 @@ class DetailScreen extends StatelessWidget {
                       child: Text(snapshot.data!.extendedIngredients[index]["name"] as String)),
                 ),
                 itemCount: snapshot.data!.extendedIngredients.length,
-              ),
+              ), mediaQuerySize
               ),
               buildSectionTitle(context, 'Steps'),
+              buildContainer(ListView.builder(
+                itemBuilder: (ctx, index) => Card(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: CircleAvatar(
+                              child: Text('#${(index+1)}'),
+                            ),
+                            title: Text(snapshot.data!.analyzedInstructions[0]['steps'][index]['step'] as String),
+                          )
+                        ],
+                      ),
+
+                ),
+                itemCount: (snapshot.data!.analyzedInstructions[0]['steps']).length,
+              ),mediaQuerySize
+              ),
             ],
           ),
         ):

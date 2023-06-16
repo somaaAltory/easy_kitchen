@@ -34,18 +34,22 @@ class RecipeRepository {
       print('Error getting recipes: $e');
        return Future.error('Error getting recipes: $e');
     }
-    //  Uri uri=_spoonaCularAPI.getRecipeByIngredients(recipesNumber, ingredients);
-    //  print("uriiiiiiii$uri");
-    // // // print("this is the fetchIngredients : ${_spoonaCularAPI.getRecipeByIngredients(recipesNumber, ingredients)}");
-    // return _getData(
-    //   uri: _spoonaCularAPI.getRecipeByIngredients(recipesNumber, ingredients),
-    //   // builder: (data) => RecipeListItem.recipeListFromJson(data['results']),
-    //
-    //
-    //   //we do findByIngredients so => the result return as aList which mean
-    //   // it can be accessed by the data variable
-    //   builder: (data) => RecipeListItem.recipeListFromJson(data),
-    // );
+
+  }
+
+  Future<List<RecipeListItem>> getRecipesComplex(int recipesNumber,
+      String ingredients,String diet) async {
+    try {
+      final uri = _spoonaCularAPI.searchRecipes(recipesNumber, ingredients,diet);
+      return _getData(
+        uri: uri,
+        builder: (data) => RecipeListItem.recipeListComplexFromJson(data),
+      );
+    } catch (e) {
+      print('Error getting recipes: $e');
+      return Future.error('Error getting recipes: $e');
+    }
+
   }
 
   Future<T> _getData<T>({
@@ -104,7 +108,6 @@ class RecipeRepository {
        return recipeRepository.getRecipes(4 , ingredientsAsString);
   });
 
-// final configProvider = FutureProvider<Recipe>((ref) async => await recipeRepositoryProvider.);
-    
+
 
 
