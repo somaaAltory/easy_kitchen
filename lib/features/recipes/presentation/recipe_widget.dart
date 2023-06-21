@@ -14,14 +14,14 @@ Widget recipeItemCard(int id, String title, String image,
     int missedIngredientCount, int usedIngredientCount, context) {
   return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
-     var recipeDetails = ref.watch(recipeRepositoryProvider).getRecipeDetails(id);
     return InkWell(
       onTap: () {
+        var recipeDetails = ref.watch(recipeRepositoryProvider).getRecipeDetails(id);
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (BuildContext context) =>
-                DetailScreen(recipeDetails),
+                DetailScreen(recipeDetails,title),
           ),
         );
       },
